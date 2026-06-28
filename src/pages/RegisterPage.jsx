@@ -20,16 +20,20 @@ function AuthLogo() {
   );
 }
 
-export default function LoginPage() {
+export default function RegisterPage() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [remember, setRemember] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (password !== confirmPassword) {
+      window.alert("Passwords do not match.");
+      return;
+    }
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
@@ -51,11 +55,23 @@ export default function LoginPage() {
 
         <div className="auth-card">
           <div className="auth-header">
-            <h1>Welcome back</h1>
-            <p>Sign in to continue your AI learning experience.</p>
+            <h1>Create an account</h1>
+            <p>Sign up and start learning with your AI tutor.</p>
           </div>
 
           <form onSubmit={handleSubmit} className="auth-form">
+            <label>
+              Full name
+              <input
+                type="text"
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+                placeholder="Your full name"
+                className="auth-input"
+                required
+              />
+            </label>
+
             <label>
               Email address
               <input
@@ -70,46 +86,35 @@ export default function LoginPage() {
 
             <label>
               Password
-              <div className="auth-password-row">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(event) => setPassword(event.target.value)}
-                  placeholder="Enter your password"
-                  className="auth-input"
-                  required
-                />
-                <button
-                  type="button"
-                  className="auth-toggle"
-                  onClick={() => setShowPassword((current) => !current)}
-                >
-                  {showPassword ? "Hide" : "Show"}
-                </button>
-              </div>
+              <input
+                type="password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                placeholder="Create a password"
+                className="auth-input"
+                required
+              />
             </label>
 
-            <div className="auth-actions">
-              <label className="auth-checkbox">
-                <input
-                  type="checkbox"
-                  checked={remember}
-                  onChange={() => setRemember((current) => !current)}
-                />
-                Remember me
-              </label>
-              <Link to="/forgot" className="auth-subtle-link">
-                Forgot password?
-              </Link>
-            </div>
+            <label>
+              Confirm password
+              <input
+                type="password"
+                value={confirmPassword}
+                onChange={(event) => setConfirmPassword(event.target.value)}
+                placeholder="Confirm your password"
+                className="auth-input"
+                required
+              />
+            </label>
 
             <button type="submit" className="auth-button" disabled={loading}>
-              {loading ? "Signing in..." : "Sign in"}
+              {loading ? "Creating account..." : "Create account"}
             </button>
           </form>
 
           <p className="auth-footer">
-            Don&apos;t have an account? <Link to="/signup" className="auth-ghost">Sign up</Link>
+            Already have an account? <Link to="/login" className="auth-ghost">Sign in</Link>
           </p>
         </div>
       </div>
