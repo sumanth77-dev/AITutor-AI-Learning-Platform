@@ -5,6 +5,8 @@ import RegisterPage from "./pages/RegisterPage";
 import HomePage from "./pages/HomePage";
 import ChatPage from "./pages/ChatPage";
 import UploadPage from "./pages/UploadPage";
+import NotesGeneratorPage from "./pages/NotesGeneratorPage";
+import QuizGenerator from "./pages/QuizGenerator";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route path="/home" element={<HomePage />} />
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/upload" element={<UploadPage />} />
+        <Route path="/notes" element={<NotesGeneratorPage />} />
+        <Route path="/quiz" element={<QuizGenerator />} />
       </Routes>
     </Router>
   );
